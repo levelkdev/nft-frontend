@@ -27,6 +27,22 @@
   margin-right: 10px;
 }
 
-.col-left {
-  margin: 50px
+.col-home-left, .col-home-right {
+  margin-top: 70px;
+}
+
+.col-home-left > * {
+  margin-top: 40px;
+}
+
+.col-home-right  h3 {
+  border-bottom: solid;
+}
+
+img.latest-exchange {
+  width: 500px;
+}
+
+img.popular-items {
+  width: 500px;
 }
