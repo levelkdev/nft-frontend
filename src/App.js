@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
+import { Button } from 'react-bootstrap';
 
+import profileCircle from './img/profile-circle.png'
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
@@ -70,22 +72,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
+        <nav className="navbar-nft navbar navbar-light">
+            <a className="navbar-nav"></a>
+            <p className="navbar-nav navbar-center">NFT Exchange</p>
+            <img className="nav-gravatar navbar-right" src={profileCircle}/>
         </nav>
-
-        <main className="container">
-          <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
+        
+        <div className="container">
+          <div className="row">
+            <div className="col-md col-left">
+              <p className="app-description">Get your perfect whatever.</p>
+              <p className="amount-listed">23849 items listed</p>
+              <div className="home-buttons">
+                <Button bsStyle="primary btn-home">View Listings</Button>
+                <Button bsStyle="primary btn-home">Add New Token</Button>
+              </div>
+            </div>
+            <div className="col-md">
+              <p> is cool! </p>
             </div>
           </div>
-        </main>
+        </div>
       </div>
     );
   }
