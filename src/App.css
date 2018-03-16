@@ -46,3 +46,8 @@ img.latest-exchange {
 img.popular-items {
   width: 500px;
 }
+
+Button a {
+  color: white;
+  text-decoration: none;
+}

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
-import { Button } from 'react-bootstrap';
+import Home from './views/Home'
+import AddToken from './views/AddToken'
+import Listings from './views/Listings'
 
 import profileCircle from './img/profile-circle.png'
-import latestExchange from './img/latest-exchange.png'
-import happyMoogle from './img/happy-moogle.png'
-import castle from './img/castle.png'
-import kitty from './img/kitty.png'
-import popularItems from './img/most-popular-items.png'
 import './css/oswald.css'
 import './App.css'
 
@@ -74,36 +72,21 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <nav className="navbar-nft navbar navbar-light">
+      <Router>
+        <div className="App">
+          <nav className="navbar-nft navbar navbar-light">
             <a className="navbar-nav"></a>
             <p className="navbar-nav navbar-center">NFT Exchange</p>
             <img className="nav-gravatar navbar-right" src={profileCircle}/>
-        </nav>
-        
-        <div className="container">
-          <div className="row">
-            <div className="col-md col-home-left">
-              <p className="app-description">Get your perfect whatever.</p>
-              <p className="amount-listed">23849 items listed</p>
-              <div className="home-buttons">
-                <Button bsStyle="primary btn-home">View Listings</Button>
-                <Button bsStyle="primary btn-home">Add New Token</Button>
-              </div>
-            </div>
-            <div className="col-md col-home-right">
-              <div className="lastest-exchange">
-                <h3>Latest Exchange</h3>
-                <img className="latest-exchange" src={latestExchange}/>
-              </div>
-              <div className="popular-items">
-                <h3>Most Popular Items</h3>
-                <img className="popular-items" src={popularItems}/>
-              </div>
-            </div>
+          </nav>
+          
+          <div className="container">
+            <Route exact path="/" component={Home} />
+            <Route path="/add-token" component={AddToken} />
+            <Route path="/listings" component={Listings} />
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
