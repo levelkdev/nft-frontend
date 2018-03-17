@@ -4,6 +4,7 @@ import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
 import Home from './views/Home'
 import AddToken from './views/AddToken'
+import Token from './views/Token'
 import Listings from './views/Listings'
 
 import profileCircle from './img/profile-circle.png'
@@ -83,6 +84,7 @@ class App extends Component {
           <div className="container">
             <Route exact path="/" component={Home} />
             <Route path="/add-token" component={AddToken} />
+            <Route path="/token" component={Token} />
             <Route path="/listings" component={Listings} />
           </div>
         </div>

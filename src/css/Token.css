@@ -1,0 +1,29 @@
+.token-info-row {
+    padding-top: 50px;
+    background-color: #fee2fc;
+    height: 300px;
+}
+
+.col-home-left, .col-home-right {
+    margin-top: 0px !important;
+}
+
+.offer-button {
+    margin-top: 50px;
+}
+.features-header {
+    margin-top: 15px; 
+}
+.col-home-left .happymoogle {
+    margin-top: 0px !important;
+    height: 40%;
+    padding-right: 40px;
+    padding-left: 30px;
+    vertical-align: middle;
+}
+
+.token-column {
+    display: inline-block;
+    padding-left: 20px;
+    vertical-align: middle;    
+}
