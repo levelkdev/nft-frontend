@@ -6,6 +6,7 @@ import getNFTExchange from './contracts/getNFTExchange'
 import getERC721 from './contracts/getERC721'
 import Home from './views/Home'
 import AddToken from './views/AddToken'
+import MakeOffer from './views/MakeOffer'
 import TokenDetail from './views/TokenDetail'
 import MyTokens from './views/MyTokens'
 import Listings from './views/Listings'
@@ -107,6 +108,7 @@ class App extends Component {
                 erc721={this.state.erc721} />
             )} />
             <Route path="/token/:tokenAddress/:tokenId" component={TokenDetail} />
+            <Route path="/make-offer/:tokenAddress/:tokenId" component={MakeOffer} />
             <Route path="/listings" render={props => (
               <Listings tokenListings={this.state.listings} />
             )} />

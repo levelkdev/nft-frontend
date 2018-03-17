@@ -46,7 +46,11 @@ class TokenDetail extends Component {
                       {Tokens[this.props.match.params.tokenAddress].name}
                     </h3>
                     <h2 className="token-id">#{this.props.match.params.tokenId}</h2>
-                    <Button className="offer-button" bsStyle="primary btn-home">Make an Offer</Button>  
+                    <Button className="offer-button" bsStyle="primary btn-home">
+                      <a href={`/make-offer/${this.props.match.params.tokenAddress}/${this.props.match.params.tokenId}`}>
+                        Make an Offer
+                      </a>
+                    </Button>  
                 </div>
             </div>
             <div className="col-md col-home-right">
