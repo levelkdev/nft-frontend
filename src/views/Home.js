@@ -30,11 +30,11 @@ export default class Home extends Component {
         <div className="col-md col-home-right">
           <div className="lastest-exchange">
             <h3>Latest Exchange</h3>
-            <img className="latest-exchange" src={latestExchange}/>
+            <a href="/listings"><img className="latest-exchange" src={latestExchange}/></a>
           </div>
           <div className="popular-items">
             <h3>Most Popular Items</h3>
-            <img className="popular-items" src={popularItems}/>
+            <a href="/listings"><img className="popular-items" src={popularItems}/></a>
           </div>
         </div>
       </div>
