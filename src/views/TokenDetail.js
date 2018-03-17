@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import getWeb3 from '../utils/getWeb3'
 import { Button } from 'react-bootstrap';
 import offers from '../img/offers.png'
-import happymoogle from '../img/happy-moogle-crop.png'
 import '../css/oswald.css'
 import '../css/Token.css'
+import Tokens from '../contracts/Tokens'
 
-class Token extends Component {
+class TokenDetail extends Component {
   constructor(props) {
     super(props)
 
@@ -40,18 +40,20 @@ class Token extends Component {
         <div className="container">
           <div className="row token-info-row">
             <div className="col-md col-home-left">
-                <img className="happymoogle" src={happymoogle}/>
+                <img className="happymoogle" src={Tokens[this.props.match.params.tokenAddress].img}/>
                 <div className="token-column">
-                    <h3 className="token-name">Happy Moogle</h3>
-                    <div className="token-id">{this.props.match.params.tokenId}</div>
+                    <h3 className="token-name">
+                      {Tokens[this.props.match.params.tokenAddress].name}
+                    </h3>
+                    <h2 className="token-id">#{this.props.match.params.tokenId}</h2>
                     <Button className="offer-button" bsStyle="primary btn-home">Make an Offer</Button>  
                 </div>
             </div>
             <div className="col-md col-home-right">
                 <h3 className="bio-header">Bio</h3>
-                <div className="bio-text">Hi there! I’m a happy moogle who enjoys eating vines and kupo nuts. I spend most of my time playing basketball and currently looking for someone to play with me!</div>
+                <div className="bio-text">{Tokens[this.props.match.params.tokenAddress].bio}</div>
                 <h3 className="features-header">Features</h3>
-                <div className="features-text">Cheerful, small wings, ruby hair pin</div>            
+                <div className="features-text">{Tokens[this.props.match.params.tokenAddress].features}</div>            
             </div>
             <div className="row">
                 <img className="offers" src={offers}/>
@@ -63,4 +65,4 @@ class Token extends Component {
   }
 }
 
-export default Token
+export default TokenDetail

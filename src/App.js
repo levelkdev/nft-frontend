@@ -6,7 +6,7 @@ import getNFTExchange from './contracts/getNFTExchange'
 import getERC721 from './contracts/getERC721'
 import Home from './views/Home'
 import AddToken from './views/AddToken'
-import Token from './views/Token'
+import TokenDetail from './views/TokenDetail'
 import MyTokens from './views/MyTokens'
 import Listings from './views/Listings'
 
@@ -106,7 +106,7 @@ class App extends Component {
                 accounts={this.state.accounts}
                 erc721={this.state.erc721} />
             )} />
-            <Route path="/token/:tokenAddress/:tokenId" component={Token} />
+            <Route path="/token/:tokenAddress/:tokenId" component={TokenDetail} />
             <Route path="/listings" render={props => (
               <Listings tokenListings={this.state.listings} />
             )} />
