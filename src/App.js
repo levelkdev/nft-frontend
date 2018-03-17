@@ -26,6 +26,7 @@ class App extends Component {
       erc721: null,
       accounts: [],
       listings: [],
+      // tokens: []
       proposedSwaps: [],
       nftExchange: null,
       web3: null
@@ -132,7 +133,11 @@ class App extends Component {
           </nav>
           
           <div className="container">
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={props => (
+              <Home
+                listingCount={this.state.listings.length}
+              />
+            )} />
             <Route path="/add-token" render={props => (
               <AddToken 
                 nftExchange={this.state.nftExchange}

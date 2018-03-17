@@ -14,7 +14,7 @@ export default class Home extends Component {
       <div className="row">
         <div className="col-md col-home-left">
           <p className="app-description">Get your perfect whatever.</p>
-          <p className="amount-listed">23849 items listed</p>
+          <p className="amount-listed">{ this.props.listingCount } items listed</p>
           <div className="home-buttons">
             <Button bsStyle="primary btn-home">
               <a href="/listings">View Listings</a>
