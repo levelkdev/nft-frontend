@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import getWeb3 from './utils/getWeb3'
 import getNFTExchange from './contracts/getNFTExchange'
 import getERC721 from './contracts/getERC721'
@@ -90,7 +91,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <nav className="navbar-nft navbar navbar-light">
-            <a className="navbar-nav"></a>
+            <Button bsStyle="primary btn-home">
+              <a className="navbar-nav" href="/">Home</a>
+            </Button>
             <p className="navbar-nav navbar-center">NFT Exchange</p>
             <img className="nav-gravatar navbar-right" src={profileCircle}/>
           </nav>
