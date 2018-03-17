@@ -22,6 +22,9 @@ export default class Home extends Component {
             <Button bsStyle="primary btn-home">
               <a href="/add-token">Add New Token</a>
             </Button>
+            <Button bsStyle="primary btn-home">
+              <a href="/token">My Listings</a>
+            </Button>
           </div>
         </div>
         <div className="col-md col-home-right">
