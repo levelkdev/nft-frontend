@@ -13,6 +13,8 @@ import MyTokens from './views/MyTokens'
 import Listings from './views/Listings'
 
 import profileCircle from './img/profile-circle.png'
+import logo from './img/logo.png'
+
 import './css/oswald.css'
 import './App.css'
 
@@ -123,10 +125,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <nav className="navbar-nft navbar navbar-light">
-            <Button bsStyle="primary btn-home">
-              <a className="navbar-nav" href="/">Home</a>
-            </Button>
-            <p className="navbar-nav navbar-center">NFT Exchange</p>
+            <a href="/">
+              <img className="navbar-nav navbar-center" src={logo}/>
+            </a>
             <img className="nav-gravatar navbar-right" src={profileCircle}/>
           </nav>
           

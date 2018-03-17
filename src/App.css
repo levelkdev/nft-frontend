@@ -13,6 +13,8 @@
   left: 50%;
   transform: translatex(-50%);
   font-size: 30px;
+  height: 80%;
+  top: 15px;
 }
 
 .nav-gravatar {
@@ -23,6 +25,11 @@
 
 .app-description {
   font-size: 60px;
+}
+
+.amount-listed {
+  color: #A3A3A3;
+  font-weight: bold;
 }
 
 .btn-home {
