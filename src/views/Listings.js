@@ -5,14 +5,12 @@ export default class Listings extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      listingItems: JSON.parse(this.fetchListingItems())
-    }
   }
 
   render() {
-    const listingItemsLength = this.state.listingItems.length
-    const listingItemComponents = this.state.listingItems.map(listing => {
+    const listingItems = JSON.parse(this.fetchListingItems(this.props))
+    const listingItemsLength = listingItems.length
+    const listingItemComponents = listingItems.map(listing => {
       return (
         <ListingItem
           id={listing.id}
@@ -47,7 +45,17 @@ export default class Listings extends Component {
     )
   }
 
-  fetchListingItems() {
+  fetchListingItems(props) {
+    console.log()
+    return JSON.stringify(props.tokenListings.map((tokenListing) => {
+      return {
+        id: tokenListing.id,
+        tokenName: tokenListing.tokenName,
+        img: 'castle.png'
+      }
+    }))
+
+    /*
     const listingItems = [
       {id: '12323', img: 'happy-moogle.png', tokenName: 'Happy Moogle'},
       {id: '43447', img: 'castle.png', tokenName: 'European Castle'},
@@ -61,6 +69,7 @@ export default class Listings extends Component {
     ]
 
     return JSON.stringify(listingItems)
+    */
   }
 
 }

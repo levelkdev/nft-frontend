@@ -60,12 +60,12 @@ class App extends Component {
         return
       }
 
-      console.log(`added ${result}`)
       let listings = component.state.listings
       let listing = {
-        id: result.tokenId.toString(),
-        tokenName: result.token
+        id: result.args.tokenId.toString(),
+        tokenName: result.args.token
       }
+      console.log('_TokenWrapped(): ', listing)
 
       listings.push(listing)
       component.setState({ listings })
@@ -78,7 +78,7 @@ class App extends Component {
         return
       }
 
-      console.log(`removed ${result}`)
+      console.log('_TokenUnwrapped(): ', result)
       // TODO: find the listing and remove it
     })
   }
@@ -102,7 +102,9 @@ class App extends Component {
                 erc721={this.state.erc721} />
             )} />
             <Route path="/token" component={Token} />
-            <Route path="/listings" component={Listings} />
+            <Route path="/listings">
+              <Listings tokenListings={this.state.listings} />
+            </Route>
           </div>
         </div>
       </Router>
