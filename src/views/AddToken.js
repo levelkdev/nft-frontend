@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
+import getERC721 from '../contracts/getERC721'
 
 import '../css/oswald.css'
 import '../App.css'
@@ -16,6 +17,18 @@ class AddToken extends Component {
       file: '',
       imagePreviewUrl: ''
     }
+  }
+
+  handleTokenContractAddressChange(event) {
+    this.setState({ tokenContractAddress: event.target.value });
+  }
+
+  handleTokenIdChange(event) {
+    this.setState({ tokenId: event.target.value });
+  }
+
+  handleTokenNameChange(event) {
+    this.setState({ tokenName: event.target.value });
   }
   
   _handleImageChange(e) {
@@ -35,16 +48,30 @@ class AddToken extends Component {
   }
 
   createToken() {
-    this.props.castle.approve(
-      this.props.nftExchange.address,
-      2,
-      { from: this.props.accounts[0] }
-    )
+    let erc721
+    console.log(`adding token ${this.state.tokenContractAddress} ${this.state.tokenId}`)
+    getERC721(this.state.tokenContractAddress)
+    .then((_erc721) => {
+      erc721 = _erc721
+      return erc721.balanceOf(this.props.accounts[0])
+    })
+    .then((tokenCount) => {
+      console.log('balance: ', tokenCount.toNumber())
+      console.log(`erc721.approve
+        ${this.props.nftExchange.address}
+        ${this.state.tokenId}
+      `)
+      return erc721.approve(
+        this.props.nftExchange.address,
+        this.state.tokenId,
+        { from: this.props.accounts[0] }
+      )
+    })
     .then((approveTx) => {
-      console.log('APPROVE TX: ', approveTx)
+      console.log('erc721.approve tx: ', approveTx)
       return this.props.nftExchange.wrapToken(
-        '0xae4c9bd0f7ae5398df05043079596e2bf0079ce9',
-        2,
+        this.state.tokenContractAddress,
+        this.state.tokenId,
         {from: this.props.accounts[0]}
       )
     })
@@ -65,16 +92,16 @@ class AddToken extends Component {
             <div className="col-md col-home-left">
               <div className="home-buttons">
                 <label style= {{display: "block"}}>
-                    <div>Wallet Address:</div>
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <div>Token Contract Address:</div>
+                    <input type="text" value={this.state.tokenContractAddress} onChange={this.handleTokenContractAddressChange.bind(this)} />
                 </label>
                 <label style= {{display: "block"}}>
                     <div>Token ID:</div>
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <input type="text" value={this.state.tokenId} onChange={this.handleTokenIdChange.bind(this)} />
                 </label>
                 <label style= {{display: "block"}}>
                     <div>Token Name:</div>
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    <input type="text" value={this.state.tokenName} onChange={this.handleTokenNameChange.bind(this)} />
                 </label>
                 <Button className="add-token-button" bsStyle="primary btn-home" onClick={this.createToken.bind(this)}>Add Token</Button>
               </div>

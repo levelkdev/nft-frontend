@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import getWeb3 from './utils/getWeb3'
 import getNFTExchange from './contracts/getNFTExchange'
-import getCastle from './contracts/getCastle'
+import getERC721 from './contracts/getERC721'
 import Home from './views/Home'
 import AddToken from './views/AddToken'
 import Token from './views/Token'
@@ -17,7 +17,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      castle: null,
+      erc721: null,
       accounts: [],
       nftExchange: null,
       web3: null
@@ -41,10 +41,6 @@ class App extends Component {
     })
     .then((nftExchange) => {
       this.setState({ nftExchange })
-      return getCastle()
-    })
-    .then((castle) => {
-      this.setState({ castle })
     })
     .catch(() => {
       console.log('Error finding web3.')
@@ -67,7 +63,7 @@ class App extends Component {
               <AddToken 
                 nftExchange={this.state.nftExchange}
                 accounts={this.state.accounts}
-                castle={this.state.castle} />
+                erc721={this.state.erc721} />
             )} />
             <Route path="/token" component={Token} />
             <Route path="/listings" component={Listings} />
