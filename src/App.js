@@ -6,6 +6,7 @@ import getERC721 from './contracts/getERC721'
 import Home from './views/Home'
 import AddToken from './views/AddToken'
 import Token from './views/Token'
+import MyTokens from './views/MyTokens'
 import Listings from './views/Listings'
 
 import profileCircle from './img/profile-circle.png'
@@ -62,6 +63,7 @@ class App extends Component {
 
       let listings = component.state.listings
       let listing = {
+        owner: result.args.owner,
         id: result.args.tokenId.toString(),
         tokenName: result.args.token
       }
@@ -102,9 +104,14 @@ class App extends Component {
                 erc721={this.state.erc721} />
             )} />
             <Route path="/token/:tokenAddress/:tokenId" component={Token} />
-            <Route path="/listings">
+            <Route path="/listings" render={props => (
               <Listings tokenListings={this.state.listings} />
-            </Route>
+            )} />
+            <Route path="/my-tokens" render={props => (
+              <MyTokens
+                tokenListings={this.state.listings}
+                accounts={this.state.accounts} />
+            )} />
           </div>
         </div>
       </Router>
