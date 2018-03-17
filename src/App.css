@@ -27,6 +27,11 @@
   font-size: 60px;
 }
 
+.amount-listed {
+  color: #A3A3A3;
+  font-weight: bold;
+}
+
 .btn-home {
   margin-right: 10px;
 }
