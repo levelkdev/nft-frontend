@@ -62,7 +62,10 @@ class App extends Component {
 
       console.log(`added ${result}`)
       let listings = component.state.listings
-      let listing = result
+      let listing = {
+        id: result.tokenId.toString(),
+        tokenName: result.token
+      }
 
       listings.push(listing)
       component.setState({ listings })
