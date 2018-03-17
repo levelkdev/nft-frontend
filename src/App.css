@@ -13,6 +13,8 @@
   left: 50%;
   transform: translatex(-50%);
   font-size: 30px;
+  height: 80%;
+  top: 15px;
 }
 
 .nav-gravatar {
