@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import sha3 from 'solidity-sha3'
 import getWeb3 from './utils/getWeb3'
 import getNFTExchange from './contracts/getNFTExchange'
 import getERC721 from './contracts/getERC721'
@@ -64,7 +65,6 @@ class App extends Component {
         return
       }
 
-      let listings = component.state.listings
       let listing = {
         owner: result.args.owner,
         id: result.args.tokenId.toString(),
@@ -72,8 +72,15 @@ class App extends Component {
       }
       console.log('_TokenWrapped(): ', listing)
 
-      listings.push(listing)
-      component.setState({ listings })
+      component.state.nftExchange._tokens(sha3(listing.tokenName, parseInt(listing.id)))
+        .then((result) => {
+          listing.owner = result[0]
+          let listings = component.state.listings
+          listings.push(listing)
+          component.setState({ listings })
+          // console.log('CURRENT TOKEN STATE: ', result)
+        })
+
     })
 
     let unwrappedEvent = component.state.nftExchange._TokenUnwrapped({}, { fromBlock: 0 })
@@ -96,6 +103,7 @@ class App extends Component {
 
       let proposedSwaps = component.state.proposedSwaps
       let proposedSwap = {
+        proposalHash: result.args.proposalHash,
         offerTokenOwner: result.args.offerTokenOwner,
         askTokenOwner: result.args.askTokenOwner,
         offerToken: result.args.offerToken,
@@ -133,7 +141,10 @@ class App extends Component {
             <Route path="/token/:tokenAddress/:tokenId" render={props => (
               <TokenDetail
                 match={props.match}
-                proposedSwaps={this.state.proposedSwaps} />
+                proposedSwaps={this.state.proposedSwaps}
+                nftExchange={this.state.nftExchange}
+                accounts={this.state.accounts}
+                web3={this.state.web3} />
             )} />
             <Route path="/make-offer/:tokenAddress/:tokenId" render={props => (
               <MakeOffer 

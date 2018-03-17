@@ -55,6 +55,15 @@ class MakeOffer extends Component {
         ask: ${askAddress} #${askId}
         offer: ${offerAddress} #${offerId}
     `)
+
+    this.props.nftExchange._tokens(sha3(askAddress, parseInt(askId)))
+      .then((res) => console.log('TOKEN1: ', res))
+      .catch((err) => console.log(err))
+
+    this.props.nftExchange._tokens(sha3(offerAddress, parseInt(offerId)))
+      .then((res) => console.log('TOKEN2: ', res))
+      .catch((err) => console.log(err))
+
     this.props.nftExchange.proposeSwap(
       sha3(askAddress, parseInt(askId)),
       sha3(offerAddress, parseInt(offerId)),
