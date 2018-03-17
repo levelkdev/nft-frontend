@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
+import sha3 from 'solidity-sha3'
 import getERC721 from '../contracts/getERC721'
 import Tokens from '../contracts/Tokens'
 
@@ -44,39 +45,26 @@ class MakeOffer extends Component {
     reader.readAsDataURL(file)
   }
 
-  createToken() {
-    let erc721
-    console.log(`adding token ${this.state.tokenContractAddress} ${this.state.tokenId}`)
-    getERC721(this.state.tokenContractAddress)
-    .then((_erc721) => {
-      erc721 = _erc721
-      return erc721.balanceOf(this.props.accounts[0])
-    })
-    .then((tokenCount) => {
-      console.log('balance: ', tokenCount.toNumber())
-      console.log(`erc721.approve
-        ${this.props.nftExchange.address}
-        ${this.state.tokenId}
-      `)
-      return erc721.approve(
-        this.props.nftExchange.address,
-        this.state.tokenId,
-        { from: this.props.accounts[0] }
-      )
-    })
-    .then((approveTx) => {
-      console.log('erc721.approve tx: ', approveTx)
-      return this.props.nftExchange.wrapToken(
-        this.state.tokenContractAddress,
-        this.state.tokenId,
-        {from: this.props.accounts[0]}
-      )
-    })
-    .then((wrapTokenTx) => {
-      console.log('WRAP TOKEN TX: ', wrapTokenTx)
+  async proposeSwap() {
+    const askAddress = this.props.match.params.tokenAddress
+    const askId = this.props.match.params.tokenId
+    const offerAddress = this.state.tokenContractAddress
+    const offerId = this.state.tokenId
+    console.log(`
+      proposing token swap
+        ask: ${askAddress} #${askId}
+        offer: ${offerAddress} #${offerId}
+    `)
+    this.props.nftExchange.proposeSwap(
+      sha3(askAddress, parseInt(askId)),
+      sha3(offerAddress, parseInt(offerId)),
+      {from: this.props.accounts[0]}
+    )
+    .then((proposeSwapTx) => {
+      console.log('PROPOSE SWAP TX: ', proposeSwapTx)
     })
     .catch((err) => {
-      console.log('Error createToken: ', err)
+      console.log('Error proposeSwap: ', err)
     })
   }
 
@@ -104,7 +92,7 @@ class MakeOffer extends Component {
                     <div>Token ID:</div>
                     <input type="text" value={this.state.tokenId} onChange={this.handleTokenIdChange.bind(this)} />
                 </label>
-                <Button className="add-token-button" bsStyle="primary btn-home" onClick={this.createToken.bind(this)}>Submit Offer</Button>
+                <Button className="add-token-button" bsStyle="primary btn-home" onClick={this.proposeSwap.bind(this)}>Submit Offer</Button>
               </div>
             </div>
             <div className="col-md col-home-right">

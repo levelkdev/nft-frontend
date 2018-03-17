@@ -108,7 +108,12 @@ class App extends Component {
                 erc721={this.state.erc721} />
             )} />
             <Route path="/token/:tokenAddress/:tokenId" component={TokenDetail} />
-            <Route path="/make-offer/:tokenAddress/:tokenId" component={MakeOffer} />
+            <Route path="/make-offer/:tokenAddress/:tokenId" render={props => (
+              <MakeOffer 
+                match={props.match}
+                nftExchange={this.state.nftExchange}
+                accounts={this.state.accounts} />
+            )} />
             <Route path="/listings" render={props => (
               <Listings tokenListings={this.state.listings} />
             )} />
