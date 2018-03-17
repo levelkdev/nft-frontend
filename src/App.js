@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       castle: null,
       accounts: [],
+      listings: [],
       nftExchange: null,
       web3: null
     }
@@ -46,8 +47,40 @@ class App extends Component {
     .then((castle) => {
       this.setState({ castle })
     })
+    .then(() => {
+      this.addEventListeners(this)
+    })
     .catch(() => {
       console.log('Error finding web3.')
+    })
+  }
+
+  // watch for contract events
+  addEventListeners(component) {
+    let wrappedEvent = component.state.nftExchange._TokenWrapped({}, { fromBlock: 0 })
+    wrappedEvent.watch(function (err, result) {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      console.log(`added ${result}`)
+      let listings = component.state.listings
+      let listing = result
+
+      listings.push(listing)
+      component.setState({ listings })
+    })
+
+    let unwrappedEvent = component.state.nftExchange._TokenUnwrapped({}, { fromBlock: 0 })
+    unwrappedEvent.watch(function (err, result) {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      console.log(`removed ${result}`)
+      // TODO: find the listing and remove it
     })
   }
 
