@@ -1,0 +1,26 @@
+.token-id {
+  text-align: right;
+}
+
+.listings {
+  margin-top: 150px;
+}
+
+.token-image {
+  width: 250px;
+  height: 200px;
+}
+
+.listings-list {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.listing-item {
+  margin: 30px;
+  display: inline-block;
+}
+
+.add-new {
+  text-align: right;
+}

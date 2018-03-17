@@ -5,6 +5,7 @@
   background: #ffffff;
   border-bottom: 2px solid;
   padding: 20px !important;
+  margin-bottom: 30px;
 }
 
 .navbar-center {
@@ -13,6 +14,7 @@
   transform: translatex(-50%);
   font-size: 30px;
 }
+
 .nav-gravatar {
   width: 100px;
 }
@@ -36,7 +38,7 @@
 }
 
 .col-home-right  h3 {
-  border-bottom: solid;
+  border-bottom: 2px solid;
 }
 
 img.latest-exchange {
