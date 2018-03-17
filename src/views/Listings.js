@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tokens from '../contracts/Tokens'
 import '../Listings.css'
 
 export default class Listings extends Component {
@@ -51,7 +52,7 @@ export default class Listings extends Component {
       return {
         id: tokenListing.id,
         tokenName: tokenListing.tokenName,
-        img: 'castle.png'
+        img: Tokens[tokenListing.tokenName].img
       }
     }))
 
@@ -84,7 +85,7 @@ class ListingItem extends Component {
       <a className='listing-item' href={`/token/${this.props.tokenName}/${this.props.id}`}>
         <div className='row'>
           <div className='col'>
-            <img className='token-image' src={require('../img/' + this.props.img)}/>
+            <img className='token-image' src={this.props.img}/>
           </div>
         </div>
         <div className='row'>

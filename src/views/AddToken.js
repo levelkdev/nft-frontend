@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import getERC721 from '../contracts/getERC721'
+import Tokens from '../contracts/Tokens'
 
 import '../css/oswald.css'
 import '../App.css'
@@ -83,6 +84,13 @@ class AddToken extends Component {
     })
   }
 
+  getImage() {
+    const token = Tokens[this.state.tokenContractAddress]
+    if (token) {
+      return token.img
+    }
+  }
+
   render() {
     return (
       <div className="AddToken">       
@@ -109,7 +117,7 @@ class AddToken extends Component {
             <div className="col-md col-home-right">
                 <label style= {{display: "block"}}>
                     <div> Picture <input onChange={(e)=>this._handleImageChange(e)} className="file-upload" type="file" accept="image/*"/></div>
-                    <div className="picture-upload-display"><img src={this.state.imagePreviewUrl} /></div>
+                    <div className="picture-upload-display"><img src={this.getImage()} /></div>
                 </label>
             </div>
           </div>
