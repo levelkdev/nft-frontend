@@ -101,7 +101,7 @@ class App extends Component {
                 accounts={this.state.accounts}
                 erc721={this.state.erc721} />
             )} />
-            <Route path="/token" component={Token} />
+            <Route path="/token/:tokenAddress/:tokenId" component={Token} />
             <Route path="/listings">
               <Listings tokenListings={this.state.listings} />
             </Route>

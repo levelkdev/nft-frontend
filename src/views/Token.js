@@ -43,7 +43,7 @@ class Token extends Component {
                 <img className="happymoogle" src={happymoogle}/>
                 <div className="token-column">
                     <h3 className="token-name">Happy Moogle</h3>
-                    <div className="token-id">ID 1399 · Moogle</div>
+                    <div className="token-id">{this.props.match.params.tokenId}</div>
                     <Button className="offer-button" bsStyle="primary btn-home">Make an Offer</Button>  
                 </div>
             </div>

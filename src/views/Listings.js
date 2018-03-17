@@ -81,7 +81,7 @@ class ListingItem extends Component {
 
   render() {
     return (
-      <div className='listing-item'>
+      <a className='listing-item' href={`/token/${this.props.tokenName}/${this.props.id}`}>
         <div className='row'>
           <div className='col'>
             <img className='token-image' src={require('../img/' + this.props.img)}/>
@@ -95,7 +95,7 @@ class ListingItem extends Component {
             <p>{this.props.tokenName}</p>
           </div>
         </div>
-      </div>
+      </a>
     )
   }
 }
