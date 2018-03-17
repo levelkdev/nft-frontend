@@ -23,6 +23,7 @@ class App extends Component {
       erc721: null,
       accounts: [],
       listings: [],
+      proposedSwaps: [],
       nftExchange: null,
       web3: null
     }
@@ -85,6 +86,28 @@ class App extends Component {
       console.log('_TokenUnwrapped(): ', result)
       // TODO: find the listing and remove it
     })
+
+    let swapProposedEvent = component.state.nftExchange._SwapProposed({}, { fromBlock: 0 })
+    swapProposedEvent.watch(function (err, result) {
+      if (err) {
+        console.error(err)
+        return
+      }
+
+      let proposedSwaps = component.state.proposedSwaps
+      let proposedSwap = {
+        offerTokenOwner: result.args.offerTokenOwner,
+        askTokenOwner: result.args.askTokenOwner,
+        offerToken: result.args.offerToken,
+        askToken: result.args.askToken,
+        offerTokenId: result.args.offerTokenId.toString(),
+        askTokenId: result.args.askTokenId.toString()
+      }
+      console.log('_SwapProposed(): ', proposedSwap)
+
+      proposedSwaps.push(proposedSwap)
+      component.setState({ proposedSwaps })
+    })
   }
 
   render() {
@@ -107,7 +130,11 @@ class App extends Component {
                 accounts={this.state.accounts}
                 erc721={this.state.erc721} />
             )} />
-            <Route path="/token/:tokenAddress/:tokenId" component={TokenDetail} />
+            <Route path="/token/:tokenAddress/:tokenId" render={props => (
+              <TokenDetail
+                match={props.match}
+                proposedSwaps={this.state.proposedSwaps} />
+            )} />
             <Route path="/make-offer/:tokenAddress/:tokenId" render={props => (
               <MakeOffer 
                 match={props.match}
